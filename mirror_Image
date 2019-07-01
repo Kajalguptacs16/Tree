@@ -1,0 +1,50 @@
+public class Main
+{
+    static Node root;
+    static Node pre = null;
+    static class Node
+    {
+        int data;
+        Node left;
+        Node right;
+        Node(int d){
+            data = d;
+            left = null;
+            right = null;
+        }
+    }
+    static void inorder(Node temp){
+        if(temp == null)
+            return;
+        inorder(temp.left);
+        System.out.print(temp.data+" ");
+        inorder(temp.right);
+    }
+    static Node mirror(Node temp){
+        if(temp!=null){
+            mirror(temp.left);
+            mirror(temp.right);
+            pre = temp.left;
+            temp.left = temp.right;
+            temp.right = pre;
+        }
+        return temp;
+    }
+	public static void main(String[] args) {
+		root = new Node(6);
+		root.left = new Node(4);
+		root.right = new Node(8);
+		root.left.left = new Node(2);
+		root.left.left.left = new Node(1);
+		root.left.left.right = new Node(3);
+		root.left.right = new Node(5);
+		root.right.left = new Node(7);
+		root.right.right = new Node(9);
+		System.out.println("Before mirror image ");
+		inorder(root);
+		mirror(root);
+		System.out.println();
+		System.out.println("After mirror image ");
+		inorder(root);
+	}
+}
