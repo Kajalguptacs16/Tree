@@ -1,0 +1,46 @@
+import java.util.*;
+public class Main
+{
+    static Node root;
+    static class Node{
+        int data;
+        Node left;
+        Node right;
+        Node(int d){
+            data = d;
+            left = right = null;
+        }
+    }
+    static int sizeTreeR(Node temp){
+            if(temp==null)
+                return 0;
+            return sizeTreeR(temp.left) + 1 + sizeTreeR(temp.right);
+    }
+    static int sizeTree(Node temp){
+        if(temp==null)
+            return 0;
+        Queue<Node> q = new LinkedList<Node>();
+        int size=0;
+        q.add(temp);
+        while(!q.isEmpty()){
+            temp = q.poll();
+            size++;
+            if(temp.left!=null)
+                q.add(temp.left);
+            if(temp.right!=null)
+                q.add(temp.right);
+        }
+        return size;
+    }
+	public static void main(String[] args){
+		root = new Node(6);
+		root.left = new Node(4);
+		root.right = new Node(8);
+		root.left.left = new Node(3);
+		root.left.right = new Node(5);
+		root.right.left = new Node(7);
+		root.right.right = new Node(10);
+		System.out.println("Size using recursion : " + sizeTreeR(root));
+		System.out.println("Size? " + sizeTree(root));
+	}
+}
