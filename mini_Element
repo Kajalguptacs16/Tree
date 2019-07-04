@@ -28,6 +28,23 @@ public class Main
         }
         return min;
     }
+    static int minEle_Recursive(Node temp){
+        int min = Integer.MAX_VALUE;
+        int val;
+        int left,right;
+        if(temp!=null){
+            val = temp.data;
+            left = minEle_Recursive(temp.left);
+            right = minEle_Recursive(temp.right);
+            if(left>right)
+                min = right;
+            else
+                min = left;
+            if(val<min)
+                min = val;
+        }
+        return min;
+    }
 	public static void main(String[] args){
 		root = new Node(6);
 		root.left = new Node(4);
@@ -36,7 +53,7 @@ public class Main
 		root.left.right = new Node(5);
 		root.right.left = new Node(7);
 		root.right.right = new Node(10);
-		System.out.print("Minimum Element : " + min_Element(root));
-		
+		System.out.println("Minimum Element : " + min_Element(root));
+		System.out.println("Minimum Element using Recursion : " + minEle_Recursive(root));
 	}
 }
