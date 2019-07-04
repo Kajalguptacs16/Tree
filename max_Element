@@ -28,6 +28,23 @@ public class Main
         }
         return max;
     }
+    static int maxEle_Recursive(Node temp){
+        int max = Integer.MIN_VALUE;
+        int val;
+        int left,right;
+        if(temp!=null){
+            val = temp.data;
+            left = maxEle_Recursive(temp.left);
+            right = maxEle_Recursive(temp.right);
+            if(left>right)
+                max = left;
+            else
+                max = right;
+            if(val>max)
+                max = val;
+        }
+        return max;
+    }
 	public static void main(String[] args){
 		root = new Node(6);
 		root.left = new Node(4);
@@ -36,7 +53,7 @@ public class Main
 		root.left.right = new Node(5);
 		root.right.left = new Node(7);
 		root.right.right = new Node(10);
-		System.out.print("Maximum Element : " + max_Element(root));
-		
+		System.out.println("Maximum Element : " + max_Element(root));
+		System.out.println("Maximum Element using Recursion : " + maxEle_Recursive(root));
 	}
 }
