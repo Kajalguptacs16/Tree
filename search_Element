@@ -1,0 +1,52 @@
+import java.util.*;
+public class Main
+{
+    static Node root;
+    static class Node{
+        int data;
+        Node left;
+        Node right;
+        Node(int d){
+            data = d;
+            left = right = null;
+        }
+    }
+    static boolean searchTreeR(Node temp, int key){
+        if(temp!=null){
+            if(temp.data == key)
+                return true;
+            return searchTreeR(temp.left,key) || searchTreeR(temp.right,key);
+        }
+        else 
+            return false;
+    }
+    static boolean searchTree(Node temp, int key){
+        if(temp==null)
+            return false;
+        Queue<Node> q = new LinkedList<Node>();
+        q.add(temp);
+        while(!q.isEmpty()){
+            temp = q.poll();
+            if(temp.data==key)
+                return true;
+            if(temp.left!=null)
+                q.add(temp.left);
+            if(temp.right!=null)
+                q.add(temp.right);
+        }
+        return false;
+    }
+	public static void main(String[] args){
+		root = new Node(6);
+		root.left = new Node(4);
+		root.right = new Node(8);
+		root.left.left = new Node(3);
+		root.left.right = new Node(5);
+		root.right.left = new Node(7);
+		root.right.right = new Node(10);
+		int k = 9;
+		System.out.println("Element found using Recursion ? " + searchTreeR(root,k));
+		int key =10;
+		System.out.println("Element found ? " + searchTree(root,key));
+	}
+}
