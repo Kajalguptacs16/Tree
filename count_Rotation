@@ -1,0 +1,53 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+public class Main
+{
+    static Node head;
+    static class Node 
+    {
+        int data;
+        Node next;
+        Node(int d){
+            data = d;
+            next = null;
+        }
+    }
+    static void printList(Node temp){
+        while(temp!=null){
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }
+        System.out.println();
+    }
+    static int count_Rotation(){
+        int min=head.data;
+        int count = 0;
+        while(head!=null){
+            if(min>head.data)
+                break;
+            else
+                count++;
+            head=head.next;
+        }
+        return count;
+    }
+	public static void main(String[] args) {
+		head = new Node(15);
+		head.next = new Node(18);
+		head.next.next = new Node(23);
+		head.next.next.next = new Node(4);
+		head.next.next.next.next = new Node(5);
+		head.next.next.next.next.next = new Node(6);
+		System.out.println("Before operation ");
+		printList(head);
+		System.out.println("After operation ");
+		System.out.println("The value of rotated element is " + count_Rotation());
+		
+	}
+}
