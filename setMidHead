@@ -1,0 +1,56 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+public class Main
+{
+    static Node head;
+    static class Node 
+    {
+        int data;
+        Node next;
+        Node(int d){
+            data = d;
+            next = null;
+        }
+    }
+    static void printList(Node temp){
+        while(temp!=null){
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }
+        System.out.println();
+    }
+    static void setMidHead(){
+        if(head==null)
+            return;
+        Node slow_ptr=head;
+        Node fast_ptr=head;
+        Node prev = null;
+        while(fast_ptr!=null && fast_ptr.next!=null){
+            prev = slow_ptr;
+            slow_ptr = slow_ptr.next;
+            fast_ptr = fast_ptr.next.next;
+        }
+        prev.next = slow_ptr.next;
+        slow_ptr.next = head;
+        head = slow_ptr;
+    }
+	public static void main(String[] args) {
+		head = new Node(1);
+		head.next = new Node(2);
+		head.next.next = new Node(3);
+		head.next.next.next = new Node(4);
+		head.next.next.next.next = new Node(5);
+		head.next.next.next.next.next = new Node(6);
+		System.out.println("Before operation ");
+		printList(head);
+		System.out.println("After operation ");
+		setMidHead();
+		printList(head);
+	}
+}
