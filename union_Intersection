@@ -1,0 +1,78 @@
+import java.util.*;
+public class Main
+{
+    static Node head1,head2;
+    static class Node 
+    {
+        int data;
+        Node next;
+        Node(int d){
+            data = d;
+            next = null;
+        }
+    }
+    static void printList(Node temp){
+        while(temp!=null){
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }
+        System.out.println();
+    }
+    static void union_List(Node node1,Node node2){
+        Hashtable<Node,Integer> hs = new Hashtable<Node,Integer>();
+        Node pre = node1;
+        while(node1!=null){
+            hs.put(node1,node1.data);
+            node1 = node1.next;
+        }
+        //System.out.println(hs);
+        Enumeration enu = hs.keys();
+        while(enu.hasMoreElements())
+            System.out.print(hs.get(enu.nextElement())+" ");
+        while(node2!=null){
+            if(hs.contains(node2.data))
+                continue;
+            else
+                System.out.println(node2.data+" ");
+            node2 = node2.next;
+        }
+        
+    }
+    static void intersection_List(Node node1,Node node2){
+        Hashtable<Node,Integer> hs1 = new Hashtable<Node,Integer>();
+        while(node1!=null){
+            hs1.put(node1,node1.data);
+            node1 = node1.next;
+        }
+        while(node2!=null){
+            if(hs1.contains(node2.data))
+                System.out.print(node2.data + " ");
+            node2 = node2.next;
+        }
+    }
+	public static void main(String[] args) {
+	    Node new_head1=null;
+	    Node new_head2=null;
+		head1 = new Node(5);
+		head1.next = new Node(4);
+		head1.next.next = new Node(3);
+		head1.next.next.next = new Node(2);
+		head1.next.next.next.next = new Node(1);
+		
+		head2 = new Node(6);
+		head2.next = new Node(5);
+		head2.next.next = new Node(3);
+		head2.next.next.next = new Node(1);
+		
+		System.out.print("1st List");
+		printList(head1);
+		System.out.print("2nd List");
+		printList(head2);
+		System.out.print("After Intersection ");
+		intersection_List(head1,head2);
+		System.out.println();
+		System.out.print("After Union ");
+		union_List(head1,head2);
+		
+	}
+}
